@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import moment from 'moment-timezone';
 import { Suspense, useId } from 'react';
+import styled from 'styled-components';
 
 import { BookCard } from '../../features/book/components/BookCard';
 import { FeatureCard } from '../../features/feature/components/FeatureCard';
@@ -16,6 +17,17 @@ import { Color, Space, Typography } from '../../foundation/styles/variables';
 import { getDayOfWeekStr } from '../../lib/date/getDayOfWeekStr';
 
 import { CoverSection } from './internal/CoverSection';
+
+const CustomBox = styled.div`
+  max-width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  height: 221px;
+  @media (max-width: 412px) {
+    height: 207px;
+  }
+`
 
 const TopPage: React.FC = () => {
   const todayStr = getDayOfWeekStr(moment());
@@ -38,13 +50,13 @@ const TopPage: React.FC = () => {
             ピックアップ
           </Text>
           <Spacer height={Space * 2} />
-          <Box height={221} maxWidth="100%" overflowX="scroll" overflowY="hidden">
+          <CustomBox>
             <Flex align="stretch" direction="row" gap={Space * 2} justify="flex-start">
               {_.map(featureList, (feature) => (
                 <FeatureCard key={feature.id} bookId={feature.book.id} />
               ))}
             </Flex>
-          </Box>
+          </CustomBox>
         </Box>
 
         <Spacer height={Space * 2} />
