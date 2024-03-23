@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment-timezone';
 import { Suspense, useId } from 'react';
-import styled from 'styled-components';
 
 import { BookCard } from '../../features/book/components/BookCard';
 import { FeatureCard } from '../../features/feature/components/FeatureCard';
@@ -17,26 +16,6 @@ import { Color, Space, Typography } from '../../foundation/styles/variables';
 import { getDayOfWeekStr } from '../../lib/date/getDayOfWeekStr';
 
 import { CoverSection } from './internal/CoverSection';
-
-const PlaceholderRelease = styled.div`
-  height: 244px;
-  background-color: #f0f0f0;
-`;
-
-const PlaceholderFeatures = styled.div`
-  height: 206px;
-  background-color: #f0f0f0;
-`;
-
-// 一旦3個だけ先に出す形にしてみる
-const PlaceholderRanking = styled.div`
-  height: calc(155px * 3);
-  background-color: #f0f0f0;
-
-  @media (max-width: 412px) {
-    height: calc(191px * 3);
-  }
-`;
 
 const TopPage: React.FC = () => {
   const todayStr = getDayOfWeekStr(moment());
@@ -59,15 +38,11 @@ const TopPage: React.FC = () => {
             ピックアップ
           </Text>
           <Spacer height={Space * 2} />
-          <Box maxWidth="100%" overflowX="scroll" overflowY="hidden">
+          <Box height={206} maxWidth="100%" overflowX="scroll" overflowY="hidden">
             <Flex align="stretch" direction="row" gap={Space * 2} justify="flex-start">
-              {
-                featureList ? (
-                  featureList.map((feature) => {
-                    return <FeatureCard key={feature.id} bookId={feature.book.id} />
-                  })
-                ) : (<PlaceholderFeatures/>)
-              }
+              {_.map(featureList, (feature) => (
+                <FeatureCard key={feature.id} bookId={feature.book.id} />
+              ))}
             </Flex>
           </Box>
         </Box>
@@ -81,13 +56,9 @@ const TopPage: React.FC = () => {
           <Spacer height={Space * 2} />
           <Box maxWidth="100%" overflowX="hidden" overflowY="hidden">
             <Flex align="center" as="ul" direction="column" justify="center">
-              {
-                rankingList ? (
-                  rankingList.map((ranking) => {
-                    return <RankingCard key={ranking.id} bookId={ranking.book.id} />
-                  })
-                ) : (<PlaceholderRanking/>)
-              }
+              {_.map(rankingList, (ranking) => (
+                <RankingCard key={ranking.id} bookId={ranking.book.id} />
+              ))}
             </Flex>
           </Box>
         </Box>
@@ -101,13 +72,9 @@ const TopPage: React.FC = () => {
           <Spacer height={Space * 2} />
           <Box maxWidth="100%" overflowX="scroll" overflowY="hidden">
             <Flex align="stretch" gap={Space * 2} justify="flex-start">
-              {
-                release ? (
-                  release.books.map((book) => {
-                    return <BookCard key={book.id} bookId={book.id} />;
-                  })
-                ) : (<PlaceholderRelease/>)
-              }
+              {_.map(release.books, (book) => (
+                <BookCard key={book.id} bookId={book.id} />
+              ))}
             </Flex>
           </Box>
         </Box>
