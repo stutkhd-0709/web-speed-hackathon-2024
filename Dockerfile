@@ -15,6 +15,7 @@ RUN pnpm install
 RUN pnpm build
 
 ENV PORT 8000
+ENV NODE_ENV production
 EXPOSE 8000
 
 ENTRYPOINT ["pnpm"]
