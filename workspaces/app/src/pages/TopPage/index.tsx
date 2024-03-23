@@ -38,7 +38,7 @@ const TopPage: React.FC = () => {
             ピックアップ
           </Text>
           <Spacer height={Space * 2} />
-          <Box maxWidth="100%" overflowX="scroll" overflowY="hidden">
+          <Box height={206} maxWidth="100%" overflowX="scroll" overflowY="hidden">
             <Flex align="stretch" direction="row" gap={Space * 2} justify="flex-start">
               {_.map(featureList, (feature) => (
                 <FeatureCard key={feature.id} bookId={feature.book.id} />

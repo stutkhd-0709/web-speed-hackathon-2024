@@ -14,7 +14,8 @@ const _Wrapper = styled(Link)`
   flex-direction: column;
   border-radius: ${Radius.SMALL};
   background-color: ${Color.MONO_A};
-  max-width: 192px;
+  min-width: 192px;
+  min-height: 242px;
   border: 1px solid ${Color.MONO_30};
 `;
 
@@ -22,6 +23,12 @@ const _ImgWrapper = styled.div`
   > img {
     border-radius: ${Radius.SMALL} ${Radius.SMALL} 0 0;
   }
+`;
+
+const PlaceholderImg = styled.div`
+  height: 128px;
+  width: 192px;
+  background: #f0f0f0; /* プレースホルダーの色 */
 `;
 
 const _AvatarWrapper = styled.div`
@@ -44,11 +51,15 @@ const BookCard: React.FC<Props> = ({ bookId }) => {
 
   return (
     <_Wrapper href={`/books/${bookId}`}>
-      {imageUrl != null && (
+      {imageUrl != null ? (
         <_ImgWrapper>
           <Image alt={book.image.alt} height={128} objectFit="cover" src={imageUrl} width={192} />
         </_ImgWrapper>
-      )}
+      )
+      : (
+        <PlaceholderImg></PlaceholderImg>
+      )
+    }
 
       <Flex align="stretch" direction="column" flexGrow={1} gap={Space * 1} justify="space-between" p={Space * 2}>
         <Text color={Color.MONO_100} typography={Typography.NORMAL14} weight="bold">

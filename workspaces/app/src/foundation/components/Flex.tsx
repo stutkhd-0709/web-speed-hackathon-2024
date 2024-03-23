@@ -9,6 +9,7 @@ const _Flex = styled.div<{
   $flexGrow?: CSS.Property.FlexGrow;
   $flexShrink?: CSS.Property.FlexShrink;
   $gap?: number;
+  $height?: number;
   $justify?: string;
   $p?: number;
   $pb?: number;
@@ -25,6 +26,7 @@ const _Flex = styled.div<{
   flex-grow: ${({ $flexGrow }) => $flexGrow};
   flex-shrink: ${({ $flexShrink }) => $flexShrink};
   gap: ${({ $gap = 0 }) => $gap}px;
+  height: ${({ $height }) => addUnitIfNeeded($height)};
   justify-content: ${({ $justify }) => $justify};
   padding-bottom: ${({ $pb, $py }) => addUnitIfNeeded($py ?? $pb)};
   padding-left: ${({ $pl, $px }) => addUnitIfNeeded($px ?? $pl)};
@@ -41,6 +43,7 @@ type Props = {
   flexGrow?: CSS.Property.FlexGrow;
   flexShrink?: CSS.Property.FlexShrink;
   gap?: number;
+  height?: number;
   justify: CSS.Property.JustifyContent;
   p?: number;
   pb?: number;
@@ -60,6 +63,7 @@ export const Flex: React.FC<Props> = ({
   flexGrow,
   flexShrink,
   gap,
+  height,
   justify,
   p,
   pb,
@@ -77,6 +81,7 @@ export const Flex: React.FC<Props> = ({
       $flexGrow={flexGrow}
       $flexShrink={flexShrink}
       $gap={gap}
+      $height={height}
       $justify={justify}
       $p={p}
       $pb={pb}

@@ -103,9 +103,19 @@ const RankingCard: React.FC<Props> = ({ bookId }) => {
   );
 };
 
+const Placeholder = styled.div`
+  width: 100%;
+  height: 130px;
+  background-color: #f0f0f0;
+
+  @media (max-width: 412px) {
+    height: 166px;
+  }
+`;
+
 const RankingCardWithSuspense: React.FC<Props> = (props) => {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<Placeholder />}>
       <RankingCard {...props} />
     </Suspense>
   );

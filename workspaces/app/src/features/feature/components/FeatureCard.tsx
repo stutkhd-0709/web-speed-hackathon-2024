@@ -18,6 +18,7 @@ const _Wrapper = styled(Link)`
   grid-template-columns: auto 1fr;
   flex-shrink: 0;
   border: 1px solid ${Color.MONO_30};
+  height: 180px;
 `;
 
 const _ImgWrapper = styled.div`
@@ -26,6 +27,12 @@ const _ImgWrapper = styled.div`
   > img {
     border-radius: ${Radius.SMALL};
   }
+`;
+
+const PlaceholderImg = styled.div`
+  height: 96px;
+  width: 96px;
+  background: #f0f0f0; /* プレースホルダーの色 */
 `;
 
 const _ContentWrapper = styled.div`
@@ -55,10 +62,12 @@ const FeatureCard: React.FC<Props> = ({ bookId }) => {
 
   return (
     <_Wrapper href={`/books/${bookId}`}>
-      {imageUrl != null && (
+      {imageUrl != null ? (
         <_ImgWrapper>
           <Image alt={book.image.alt} height={96} objectFit="cover" src={imageUrl} width={96} />
         </_ImgWrapper>
+      ) : (
+        <PlaceholderImg></PlaceholderImg>
       )}
 
       <_ContentWrapper>
