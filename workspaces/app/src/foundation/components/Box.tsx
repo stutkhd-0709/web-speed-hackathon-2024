@@ -82,6 +82,8 @@ type Props = {
   maxHeight?: number | string;
   maxWidth?: number | string;
   mb?: number;
+  minHeight?: number | string;
+  minWidth?: number | string;
   ml?: number;
   mr?: number;
   mt?: number;

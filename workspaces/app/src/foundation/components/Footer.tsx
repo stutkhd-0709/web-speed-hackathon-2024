@@ -49,7 +49,7 @@ export const Footer: React.FC = () => {
     );
   };
 
-  const handleRequestToContactDialogOpen = async() => {
+  const handleRequestToContactDialogOpen = async () => {
     const Contract = await import('../constants/Contact');
     updateDialogContent(
       <_Content aria-labelledby={contactDialogA11yId} role="dialog">
@@ -64,7 +64,7 @@ export const Footer: React.FC = () => {
     );
   };
 
-  const handleRequestToQuestionDialogOpen = async() => {
+  const handleRequestToQuestionDialogOpen = async () => {
     const Question = await import('../constants/Question');
     updateDialogContent(
       <_Content aria-labelledby={questionDialogA11yId} role="dialog">
@@ -79,7 +79,7 @@ export const Footer: React.FC = () => {
     );
   };
 
-  const handleRequestToCompanyDialogOpen = async() => {
+  const handleRequestToCompanyDialogOpen = async () => {
     const Company = await import('../constants/Company');
 
     updateDialogContent(
@@ -95,7 +95,7 @@ export const Footer: React.FC = () => {
     );
   };
 
-  const handleRequestToOverviewDialogOpen = async() => {
+  const handleRequestToOverviewDialogOpen = async () => {
     const Overview = await import('../constants/Overview');
 
     updateDialogContent(
