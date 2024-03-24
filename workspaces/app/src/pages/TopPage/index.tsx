@@ -26,15 +26,19 @@ const CustomBox = styled.div`
     height: 207px;
   }
 `
+const isSSR: boolean = typeof window === 'undefined';
 
 const TopPage: React.FC = () => {
+  let prefetchedData = {}
+  if (!isSSR) {
+    const scriptTag = document.getElementById('inject-data') || {};
+    prefetchedData = JSON.parse(scriptTag.textContent);
+  }
+
   const todayStr = getDayOfWeekStr(new Date());
-
-  console.log('client new Date', new Date())
-
-  const { data: release } = useRelease({ params: { dayOfWeek: todayStr } });
-  const { data: featureList } = useFeatureList({ query: {} });
-  const { data: rankingList } = useRankingList({ query: {} });
+  const { data: release } = useRelease(prefetchedData, { params: { dayOfWeek: todayStr } });
+  const { data: featureList } = useFeatureList(prefetchedData, { query: {} });
+  const { data: rankingList } = useRankingList(prefetchedData, { query: {} });
 
   const pickupA11yId = useId();
   const rankingA11yId = useId();
