@@ -45,6 +45,13 @@ const _AvatarWrapper = styled.div`
   }
 `;
 
+const PlaceholderImg = styled.div`
+  height: 256px;
+  width: 192px;
+  background: #f0f0f0; /* プレースホルダーの色 */
+`;
+
+
 const BookDetailPage: React.FC = () => {
   const { bookId } = useParams<RouteParams<'/books/:bookId'>>();
   invariant(bookId);
@@ -66,8 +73,10 @@ const BookDetailPage: React.FC = () => {
   return (
     <Box height="100%" position="relative" px={Space * 2}>
       <_HeadingWrapper aria-label="作品情報">
-        {bookImageUrl != null && (
+        {bookImageUrl != null ? (
           <Image alt={book.name} height={256} objectFit="cover" src={bookImageUrl} width={192} />
+        ) : (
+          <PlaceholderImg></PlaceholderImg>
         )}
         <Flex align="flex-start" direction="column" gap={Space * 1} justify="flex-end">
           <Box>
