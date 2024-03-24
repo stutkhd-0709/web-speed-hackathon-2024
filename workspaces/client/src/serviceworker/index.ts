@@ -19,11 +19,16 @@ self.addEventListener('activate', (ev: ExtendableEvent) => {
 });
 
 self.addEventListener('fetch', (ev: FetchEvent) => {
-  ev.respondWith(
-    queue.add(() => onFetch(ev.request), {
-      throwOnTimeout: true,
-    }),
-  );
+  if (ev.request.url.includes('/assets/')) {
+    console.log('assets', ev.request.url)
+    ev.respondWith(fetch(ev.request));
+  } else {
+    ev.respondWith(
+      queue.add(() => onFetch(ev.request), {
+        throwOnTimeout: true,
+      }),
+    );
+  }
 });
 
 async function onFetch(request: Request): Promise<Response> {

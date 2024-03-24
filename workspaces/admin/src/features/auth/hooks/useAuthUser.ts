@@ -6,7 +6,6 @@ export function useAuthUser() {
   return useSuspenseQuery({
     queryFn: async () => {
       try {
-        console.log('aaaaaaaaa')
         const user = await authApiClient.fetchAuthUser();
         return user;
       } catch (_err) {
