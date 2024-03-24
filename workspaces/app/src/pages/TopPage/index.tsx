@@ -1,4 +1,3 @@
-import moment from 'moment-timezone';
 import { Suspense, useId } from 'react';
 import styled from 'styled-components';
 
@@ -29,7 +28,10 @@ const CustomBox = styled.div`
 `
 
 const TopPage: React.FC = () => {
-  const todayStr = getDayOfWeekStr(moment());
+  const todayStr = getDayOfWeekStr(new Date());
+
+  console.log('client new Date', new Date())
+
   const { data: release } = useRelease({ params: { dayOfWeek: todayStr } });
   const { data: featureList } = useFeatureList({ query: {} });
   const { data: rankingList } = useRankingList({ query: {} });
